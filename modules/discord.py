@@ -1,4 +1,4 @@
-from ads_selenium_meme.data.constants import *
+from data.constants import *
 from loguru import logger
 from selenium.webdriver.support.ui import WebDriverWait
 

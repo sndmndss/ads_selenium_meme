@@ -1,10 +1,10 @@
-from ads_selenium_meme.helpers import parse_accounts
+from helpers import parse_accounts
 import requests
-from ads_selenium_meme.modules import get_ads_profile
-from ads_selenium_meme.data import CLOSE_URL
-from ads_selenium_meme.modules.ads_driver import AdsDriver
-from ads_selenium_meme.modules.discord import login_discord
-from ads_selenium_meme.modules import create_browser
+from modules.ads_profiles import get_ads_profile
+from data.constants import CLOSE_URL
+from modules.ads_driver import AdsDriver
+from modules.discord import login_discord
+from modules.ads_profiles import create_browser
 
 
 def discord_queue(startpoint, is_dyno):

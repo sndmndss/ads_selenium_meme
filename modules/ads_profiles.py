@@ -1,9 +1,9 @@
-from ads_selenium_meme.data.constants import *
+from data.constants import *
 from time import sleep
 from fake_useragent import UserAgent
 import requests
 from loguru import logger
-from ads_selenium_meme.helpers import proxy_options_for_fuser
+from helpers import proxy_options_for_fuser
 
 
 def send_request(profile_name, country, timezone, proxy, group_id):
