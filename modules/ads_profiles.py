@@ -7,10 +7,6 @@ from helpers import proxy_options_for_fuser
 
 
 def send_request(profile_name, country, timezone, proxy, group_id):
-
-    headers = {
-        "Authorization": f"Bearer {API_KEY}"
-    }
     data = {
         "name": profile_name,
         "country": country,
@@ -31,7 +27,7 @@ def send_request(profile_name, country, timezone, proxy, group_id):
             "proxy_password": proxy['password']
         }
     }
-    response = requests.post(f"{API_URL}/api/v1/user/create", headers=headers, json=data)
+    response = requests.post(f"{API_URL}/api/v1/user/create", json=data)
     if response.status_code == 200:
         logger.success("Successfully created")
         logger.info(response.json())
