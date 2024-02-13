@@ -12,11 +12,10 @@ def send_request(profile_name, country, timezone, proxy, group_id):
         "country": country,
         "timezone": timezone,
         "group_id": str(group_id),
-        "open_urls": [MEME_FARMING,],
         "fingerprint_config": {
             "automatic_timezone": "1",
             "language_switch": "1",
-            "ua": UserAgent(os=["windows", "macos"]).random
+            "ua": UserAgent(os=["windows"], browsers=["chrome", "edge", "firefox", "safari"]).random
         },
         "user_proxy_config": {
             "proxy_soft": "other",
