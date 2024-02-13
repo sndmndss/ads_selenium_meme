@@ -1,10 +1,11 @@
 OPEN_URL = "http://local.adspower.net:50325/api/v1/browser/start?serial_number="
 CLOSE_URL = "http://local.adspower.net:50325/api/v1/browser/stop?serial_number="
 DISCORD_MEME = "https://discord.com/invite/memeland"
-API_KEY = "6c3a65d84edfb8c92cb2c43faf01db0b"
+API_KEY = "YOUR API KEY"
 API_URL = "http://local.adspower.net:50325"
 DYNO_MEME = "https://dyno.gg/auth?return=/form/ecfaebc1"
 MEME_FARMING = "https://www.memecoin.org/farming"
+RAINBOW_LINK = "chrome-extension://opfgelmcmbiajamepnmloijbpoleiama/popup.html#/import/pkey?onboarding=true"
 js_code = """
         function login(token) {
         setInterval(() => {

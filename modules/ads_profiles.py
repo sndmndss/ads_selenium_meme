@@ -57,7 +57,5 @@ def create_browser():
 
 def get_ads_profile(startpoint):
     resp = requests.get(OPEN_URL + startpoint).json()
-    if resp["code"] != 0:
-        print(resp["msg"])
-        print("please check ads_id")
+    logger.info(f"{resp['msg']}\n Make sure that serial number exists\nIf you sure, re-roll user agent in this profile")
     return resp

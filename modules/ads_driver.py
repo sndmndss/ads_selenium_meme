@@ -9,7 +9,6 @@ class AdsDriver:
 
     @classmethod
     def _initiate_driver(cls, ads_info):
-        print(ads_info)
         chrome_driver_path = ads_info["data"]["webdriver"]
         debugger_address = ads_info["data"]["ws"]["selenium"]
         chrome_options = Options()
