@@ -3,11 +3,11 @@ from loguru import logger
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from data.constants import (RAINBOW_INPUT_CSS_SELECTOR,
-                            RAINBOW_BUTTON_CSS_SELECTOR,
-                            RAINBOW_PASSWORD_1,
-                            RAINBOW_PASSWORD_2,
-                            RAINBOW_BUTTON_2_CSS_SELECTOR)
+from data.css_selectors import (RAINBOW_INPUT_CSS_SELECTOR,
+                                RAINBOW_BUTTON_CSS_SELECTOR,
+                                RAINBOW_PASSWORD_1,
+                                RAINBOW_PASSWORD_2,
+                                RAINBOW_BUTTON_2_CSS_SELECTOR)
 
 
 def proxy_options_for_fuser():
