@@ -13,10 +13,10 @@ def login_discord(driver, token: str, is_dyno: bool):
     else:
         driver.get(DISCORD_MEME)
     logger.info(token + " | token")
-    sleep(2)
     try:
         driver.execute_script(js_code, token)
         logger.success(token + " | code executed successfully")
+        sleep(2)
     except Exception as e:
         logger.error(token + " | loging in was failed" + str(e))
     logger.warning("DON'T PRESS ENTER IN THIS TERMINAL BEFORE ENDING OF VERIFYING")
