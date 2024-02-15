@@ -5,13 +5,15 @@ from time import sleep
 
 def login_discord(driver, token: str, is_dyno: bool):
     if is_dyno:
-        sleep(2)
+        sleep(3)
         driver.execute_script("window.open('');")
         driver.switch_to.window(driver.window_handles[-1])
         driver.get(DYNO_MEME)
+
     else:
         driver.get(DISCORD_MEME)
     logger.info(token + " | token")
+    sleep(2)
     try:
         driver.execute_script(js_code, token)
         logger.success(token + " | code executed successfully")
