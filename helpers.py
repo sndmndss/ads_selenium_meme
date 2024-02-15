@@ -18,7 +18,7 @@ def parse_accounts():
     accounts: list = []
     with open("data/accounts.txt", "r") as f:
         for iteration, line in enumerate(f):
-            accounts.append(line.split(";")[-1].rstrip("\n"))
+            accounts.append(line.split(":")[-1].rstrip("\n"))
     return accounts
 
 

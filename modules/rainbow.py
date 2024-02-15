@@ -12,6 +12,11 @@ from data.css_selectors import (RAINBOW_INPUT_CSS_SELECTOR,
 
 
 def rainbow_login(driver, key: str):
+    window_handles = driver.window_handles
+    for handle in window_handles:
+        driver.switch_to.window(handle)
+        if driver.title == "Rainbow Wallet":
+            break
     driver.get(RAINBOW_LINK)
     _rainbow_fill(driver, key)
 

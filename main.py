@@ -16,7 +16,7 @@ def profile_queue():
     for iteration, proxy in enumerate(proxy_list):
         profile_name = str(iteration)
         AdsProfiles.send_request(profile_name, proxy)
-        sleep(0.19)
+        sleep(0.25)
         if iteration == 100:
             break
 
