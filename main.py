@@ -1,13 +1,14 @@
 from helpers import parse_accounts, parse_keys
 import requests
 from data.constants import CLOSE_URL
-from modules.ads_driver import AdsDriver
+from ads_power.ads_driver import AdsBrowser
 from modules.discord import login_discord
 from modules.rainbow import rainbow_login
 from data.constants import MEME_FARMING
-from modules.ads_profiles import AdsProfiles
+from ads_power.ads_profiles import AdsProfiles
 from helpers import proxy_options_for_fuser
 from time import sleep
+from modules.meme import meme_login
 
 
 def profile_queue():
@@ -20,29 +21,30 @@ def profile_queue():
             break
 
 
-def discord_queue(startpoint=0):
+def discord_queue(startpoint: int):
     tokens = parse_accounts()
     for iteration, token in enumerate(tokens):
         resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
-        ads_driver = AdsDriver(resp)
+        ads_driver = AdsBrowser(resp)
         login_discord(ads_driver.driver, token, is_dyno=False)
         input()
         requests.get(CLOSE_URL + startpoint)
         ads_driver.close_driver()
 
 
-def dyno_queue(startpoint):
+def dyno_queue(startpoint: int):
     keys = parse_keys()
     tokens = parse_accounts()
     for iteration, token in enumerate(tokens):
         resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
-        ads_driver = AdsDriver(resp)
-        login_discord(ads_driver.driver, token, is_dyno=True)
-        rainbow_login(ads_driver.driver, key=keys[iteration])
-        ads_driver.driver.get(MEME_FARMING)
+        ads_browser = AdsBrowser(resp)
+        login_discord(ads_browser.driver, token, is_dyno=True)
+        rainbow_login(ads_browser.driver, key=keys[iteration])
+        ads_browser.driver.get(MEME_FARMING)
+        meme_login(ads_browser.driver)
         input()
         requests.get(CLOSE_URL + startpoint)
-        ads_driver.close_driver()
+        ads_browser.close_driver()
 
 
 if __name__ == "__main__":
@@ -56,13 +58,8 @@ if __name__ == "__main__":
     if choice in menu_options:
         if choice == "1":
             menu_options[choice]()
-        if choice == "2":
+        if choice == "2" or choice == "3":
             serial_n = input("Enter serial number: ")
             menu_options[choice](serial_n)
-        if choice == "3":
-            serial_n = input("Enter serial number: ")
-            menu_options[choice](serial_n)
-        else:
-            menu_options[choice]()
     else:
         print("Wrong input")

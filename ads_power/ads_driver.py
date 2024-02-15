@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 
 
-class AdsDriver:
+class AdsBrowser:
     def __init__(self, ads_info):
         self.driver = self._initiate_driver(ads_info)
 
@@ -15,6 +15,7 @@ class AdsDriver:
         chrome_options.add_experimental_option("debuggerAddress", debugger_address)
         service = Service(executable_path=chrome_driver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
+        driver.set_window_size(1920, 1080)
         return driver
 
     def close_driver(self):
