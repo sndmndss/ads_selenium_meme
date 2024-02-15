@@ -30,3 +30,17 @@ def parse_keys():
     return keys
 
 
+def delete_key(string):
+    with open('data/keys.txt', 'r') as file:
+        lines = file.readlines()
+    lines = [line for line in lines if string not in line]
+    with open('data/keys.txt', 'w') as file:
+        file.writelines(lines)
+
+
+def delete_discord(string):
+    with open('data/accounts.txt', 'r') as file:
+        lines = file.readlines()
+    lines = [line for line in lines if string not in line]
+    with open('data/accounts.txt', 'w') as file:
+        file.writelines(lines)

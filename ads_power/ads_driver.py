@@ -15,7 +15,6 @@ class AdsBrowser:
         chrome_options.add_experimental_option("debuggerAddress", debugger_address)
         service = Service(executable_path=chrome_driver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
-        driver.set_window_size(1920, 1080)
         return driver
 
     def close_driver(self):
