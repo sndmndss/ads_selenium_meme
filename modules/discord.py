@@ -1,9 +1,13 @@
 from data.constants import *
 from loguru import logger
+from time import sleep
 
 
 def login_discord(driver, token: str, is_dyno: bool):
     if is_dyno:
+        sleep(2)
+        driver.execute_script("window.open('');")
+        driver.switch_to.window(driver.window_handles[-1])
         driver.get(DYNO_MEME)
     else:
         driver.get(DISCORD_MEME)
