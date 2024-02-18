@@ -50,11 +50,10 @@ def dyno_queue(startpoint: int):
 
 def molly_queue(startpoint: int):
     keys = parse_keys()
-    tokens = parse_accounts()
-    for iteration, token in enumerate(tokens):
+    for iteration, key in enumerate(keys):
         resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
         ads_browser = AdsBrowser(resp)
-        rainbow_login(ads_browser.driver, key=keys[iteration])
+        rainbow_login(ads_browser.driver, key=key)
         login_molly(ads_browser.driver)
         requests.get(CLOSE_URL + startpoint)
         ads_browser.close_driver()
