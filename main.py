@@ -4,6 +4,7 @@ from data.constants import CLOSE_URL, MOLLY_LINK
 from ads_power.ads_driver import AdsBrowser
 from modules.discord import login_discord
 from modules.rainbow import rainbow_login
+from modules.molly import login_molly
 from data.constants import MEME_FARMING
 from ads_power.ads_profiles import AdsProfiles
 from helpers import proxy_options_for_fuser
@@ -53,10 +54,10 @@ def molly_queue(startpoint: int):
     for iteration, token in enumerate(tokens):
         resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
         ads_browser = AdsBrowser(resp)
-        login_discord(ads_browser.driver, token)
         rainbow_login(ads_browser.driver, key=keys[iteration])
-        ads_browser.driver.get(MOLLY_LINK)
-        input()
+        login_molly(ads_browser.driver)
+        requests.get(CLOSE_URL + startpoint)
+        ads_browser.close_driver()
 
 
 if __name__ == "__main__":

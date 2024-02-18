@@ -1,6 +1,7 @@
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
+import subprocess
 
 
 class AdsBrowser:
@@ -19,3 +20,8 @@ class AdsBrowser:
 
     def close_driver(self):
         self.driver.quit()
+        try:
+            subprocess.run(['taskkill', '/F', '/IM', 'SunBrowser.exe'], check=True)
+        except Exception as e:
+            print("Process is not running : "+ str(e))
+
