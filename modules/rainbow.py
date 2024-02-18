@@ -1,4 +1,5 @@
 from data.constants import *
+from time import sleep
 from loguru import logger
 from helpers import delete_key
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,11 +13,14 @@ from data.css_selectors import (RAINBOW_INPUT_CSS_SELECTOR,
 
 
 def rainbow_login(driver, key: str):
-    window_handles = driver.window_handles
-    for handle in window_handles:
-        driver.switch_to.window(handle)
-        if driver.title == "Rainbow Wallet":
-            break
+    found = False
+    while not found:
+        window_handles = driver.window_handles
+        for handle in window_handles:
+            driver.switch_to.window(handle)
+            if driver.title == "Rainbow Wallet":
+                found = True
+                break
     driver.get(RAINBOW_LINK)
     _rainbow_fill(driver, key)
 

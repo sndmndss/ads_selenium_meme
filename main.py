@@ -1,6 +1,6 @@
 from helpers import parse_accounts, parse_keys
 import requests
-from data.constants import CLOSE_URL
+from data.constants import CLOSE_URL, MOLLY_LINK
 from ads_power.ads_driver import AdsBrowser
 from modules.discord import login_discord
 from modules.rainbow import rainbow_login
@@ -48,19 +48,34 @@ def dyno_queue(startpoint: int):
         ads_browser.close_driver()
 
 
+def molly_queue(startpoint: int):
+    keys = parse_keys()
+    tokens = parse_accounts()
+    for iteration, token in enumerate(tokens):
+        resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
+        ads_browser = AdsBrowser(resp)
+        login_discord(ads_browser.driver, token)
+        rainbow_login(ads_browser.driver, key=keys[iteration])
+        ads_browser.driver.get(MOLLY_LINK)
+        input()
+
+
 if __name__ == "__main__":
-    print("Enter:\n1. To make browsers\n2. Logging in discord\n3. For DYNO")
+    print("Enter:\n1. To make browsers\n2. Logging in discord\n3. For DYNO\n4. For molly")
     menu_options = {
         "1": profile_queue,
         "2": discord_queue,
-        "3": dyno_queue
+        "3": dyno_queue,
+        "4": molly_queue
     }
     choice = input()
     if choice in menu_options:
         if choice == "1":
             menu_options[choice]()
-        if choice == "2" or choice == "3":
+        elif int(choice) <= 4:
             serial_n = input("Enter serial number: ")
             menu_options[choice](serial_n)
+        else:
+            print("Wrong input")
     else:
         print("Wrong input")

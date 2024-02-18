@@ -11,7 +11,6 @@ def meme_login(driver):
             EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'CHECK PROGRESS WITH WALLET')]"))
         )
         check_button.click()
-        sleep(1)
         rainbow_button = wait.until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Rainbow')]"))
         )
