@@ -6,7 +6,7 @@ from modules.discord import login_discord
 from modules.rainbow import rainbow_login
 from data.constants import MEME_FARMING
 from ads_power.ads_profiles import AdsProfiles
-from helpers import proxy_options_for_fuser, delete_discord
+from helpers import proxy_options_for_fuser
 from time import sleep
 from modules.meme import meme_login
 
@@ -39,7 +39,6 @@ def dyno_queue(startpoint: int):
         resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
         ads_browser = AdsBrowser(resp)
         login_discord(ads_browser.driver, token, is_dyno=True)
-        delete_discord(token)
         rainbow_login(ads_browser.driver, key=keys[iteration])
         ads_browser.driver.get(MEME_FARMING)
         meme_login(ads_browser.driver)
