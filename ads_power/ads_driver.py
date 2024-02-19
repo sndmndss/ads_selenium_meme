@@ -1,6 +1,9 @@
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+import requests
+from ads_power.ads_profiles import AdsProfiles
 from selenium import webdriver
+from data.constants import CLOSE_URL_ID
 import subprocess
 
 
@@ -20,8 +23,9 @@ class AdsBrowser:
 
     def close_driver(self):
         self.driver.quit()
+        requests.get(CLOSE_URL_ID + AdsProfiles.user_ids[0])
         try:
             subprocess.run(['taskkill', '/F', '/IM', 'SunBrowser.exe'], check=True)
         except Exception as e:
-            print("Process is not running : "+ str(e))
+            print("Process is not running : " + str(e))
 

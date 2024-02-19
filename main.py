@@ -22,7 +22,6 @@ def profile_queue():
 def molly_queue():
     keys = parse_keys()
     proxy_list = proxy_options_for_fuser()
-    serial_number = 0
     for iteration, key in enumerate(keys):
         AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[iteration])
         user_id = AdsProfiles.user_ids[0]
@@ -30,7 +29,6 @@ def molly_queue():
         ads_browser = AdsBrowser(resp)
         rainbow_login(ads_browser.driver, key=key)
         login_molly(ads_browser.driver)
-        requests.get(CLOSE_URL + str(serial_number))
         ads_browser.close_driver()
         AdsProfiles.delete_profiles()
 
