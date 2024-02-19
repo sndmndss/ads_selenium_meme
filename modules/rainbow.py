@@ -1,5 +1,4 @@
 from data.constants import *
-from time import sleep
 from loguru import logger
 from helpers import delete_key
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,11 +9,15 @@ from data.css_selectors import (RAINBOW_INPUT_CSS_SELECTOR,
                                 RAINBOW_PASSWORD_1,
                                 RAINBOW_PASSWORD_2,
                                 RAINBOW_BUTTON_2_CSS_SELECTOR)
+import time
 
 
 def rainbow_login(driver, key: str):
+    start_time = time.time()
     found = False
     while not found:
+        if time.time() - start_time > 30:
+            break
         window_handles = driver.window_handles
         for handle in window_handles:
             driver.switch_to.window(handle)

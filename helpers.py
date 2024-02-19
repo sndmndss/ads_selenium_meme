@@ -1,6 +1,7 @@
 from random import randint
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 def proxy_options_for_fuser():
     proxy_list = []
     with open("data/proxies.txt", "r") as f:

@@ -1,6 +1,6 @@
 from helpers import parse_accounts, parse_keys
 import requests
-from data.constants import CLOSE_URL, MOLLY_LINK
+from data.constants import CLOSE_URL
 from ads_power.ads_driver import AdsBrowser
 from modules.discord import login_discord
 from modules.rainbow import rainbow_login
@@ -12,14 +12,21 @@ from time import sleep
 from modules.meme import meme_login
 
 
-def profile_queue():
-    proxy_list = proxy_options_for_fuser()
+temp_proxy = []
+
+
+def profile_queue(with_temp=0):
+    if with_temp:
+        proxy_list = temp_proxy
+    else:
+        proxy_list = proxy_options_for_fuser()
     for iteration, proxy in enumerate(proxy_list):
-        profile_name = str(iteration)
-        AdsProfiles.send_request(profile_name, proxy)
-        sleep(0.25)
-        if iteration == 100:
-            break
+        if iteration <= 100:
+            profile_name = str(iteration)
+            AdsProfiles.send_request(profile_name, proxy)
+            sleep(0.25)
+        else:
+            temp_proxy.append(proxy)
 
 
 def discord_queue(startpoint: int):
@@ -51,12 +58,16 @@ def dyno_queue(startpoint: int):
 def molly_queue(startpoint: int):
     keys = parse_keys()
     for iteration, key in enumerate(keys):
-        resp = AdsProfiles.get_ads_profile(str(int(startpoint) + iteration))
+        startpoint = int(startpoint) + iteration
+        resp = AdsProfiles.get_ads_profile(str(startpoint))
         ads_browser = AdsBrowser(resp)
         rainbow_login(ads_browser.driver, key=key)
         login_molly(ads_browser.driver)
         requests.get(CLOSE_URL + startpoint)
         ads_browser.close_driver()
+    AdsProfiles.delete_profile()
+    profile_queue(with_temp=True)
+    molly_queue(startpoint)
 
 
 if __name__ == "__main__":

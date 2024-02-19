@@ -8,6 +8,7 @@ class AdsProfiles:
     country = "US"
     timezone = "GMT-5"
     group_id = 0
+    user_ids = []
 
     @classmethod
     def send_request(cls, profile_name, proxy):
@@ -31,6 +32,20 @@ class AdsProfiles:
             }
         }
         response = requests.post(f"{API_URL}/api/v1/user/create", json=data)
+        if response.status_code == 200:
+            logger.success("Successfully created")
+            logger.info(response.json())
+            cls.user_ids.append(response.json()["data"]["id"])
+        else:
+            logger.error("There was some trouble")
+            logger.info(response.json())
+
+    @classmethod
+    def delete_profile(cls):
+        data = {
+            "user_ids": cls.user_ids
+        }
+        response = requests.post(f"{API_URL}/api/v1/user/delete", json=data)
         if response.status_code == 200:
             logger.success("Successfully created")
             logger.info(response.json())
