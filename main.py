@@ -21,12 +21,15 @@ def profile_queue(with_temp=0):
     else:
         proxy_list = proxy_options_for_fuser()
     for iteration, proxy in enumerate(proxy_list):
-        if iteration <= 100:
+        if iteration < 100:
             profile_name = str(iteration)
             AdsProfiles.send_request(profile_name, proxy)
             sleep(0.25)
         else:
             temp_proxy.append(proxy)
+            print("Serial number: ")
+            startpoint = int(input())
+            molly_queue(startpoint)
 
 
 def discord_queue(startpoint: int):
@@ -63,7 +66,7 @@ def molly_queue(startpoint: int):
         ads_browser = AdsBrowser(resp)
         rainbow_login(ads_browser.driver, key=key)
         login_molly(ads_browser.driver)
-        requests.get(CLOSE_URL + startpoint)
+        requests.get(CLOSE_URL + str(startpoint))
         ads_browser.close_driver()
     AdsProfiles.delete_profile()
     profile_queue(with_temp=True)
