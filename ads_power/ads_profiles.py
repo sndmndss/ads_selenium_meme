@@ -11,7 +11,7 @@ class AdsProfiles:
     user_ids = []
 
     @classmethod
-    def send_request(cls, profile_name, proxy):
+    def create_profile(cls, profile_name, proxy):
         data = {
             "name": profile_name,
             "country": cls.country,
@@ -33,7 +33,7 @@ class AdsProfiles:
         }
         response = requests.post(f"{API_URL}/api/v1/user/create", json=data)
         if response.status_code == 200:
-            logger.success("Successfully created")
+            logger.success("Successfully posted")
             logger.info(response.json())
             cls.user_ids.append(response.json()["data"]["id"])
         else:
@@ -41,13 +41,14 @@ class AdsProfiles:
             logger.info(response.json())
 
     @classmethod
-    def delete_profile(cls):
+    def delete_profiles(cls):
         data = {
             "user_ids": cls.user_ids
         }
         response = requests.post(f"{API_URL}/api/v1/user/delete", json=data)
+        cls.user_ids = []
         if response.status_code == 200:
-            logger.success("Successfully created")
+            logger.success("Successfully posted")
             logger.info(response.json())
         else:
             logger.error("There was some trouble")
@@ -55,6 +56,6 @@ class AdsProfiles:
 
     @classmethod
     def get_ads_profile(cls, startpoint):
-        resp = requests.get(OPEN_URL + startpoint).json()
+        resp = requests.get(OPEN_URL_ID + startpoint).json()
         logger.info(f"{resp['msg']}\n Make sure that serial number exists\nIf you sure, re-roll user agent in this profile")
         return resp

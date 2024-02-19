@@ -1,7 +1,7 @@
-from data.constants import MOLLY_LINK
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from data.constants import MOLLY_LINK
 from time import sleep
 
 
@@ -45,7 +45,14 @@ def login_molly(driver):
             EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Sign')]"))
         )
         sign_rainbow.click()
-        sleep(1)
+        sleep(2)
+        # windows = driver.window_handles
+        # driver.switch_to.window(windows[-1])
+        # sign_discord = wait.until(
+        #     EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Continue with Discord')]"))
+        # )
+        # sign_discord.click()
+        # sleep(10)
 
     except Exception as e:
         print("Vse ploho" + str(e))
