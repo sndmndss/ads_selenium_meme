@@ -48,3 +48,4 @@ def _rainbow_fill(driver, key, password="8901324567Ww"):
         delete_key(key)
     except Exception as e:
         logger.error("Something went wrong " + str(e))
+        input()

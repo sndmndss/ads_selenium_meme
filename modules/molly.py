@@ -46,13 +46,6 @@ def login_molly(driver):
         )
         sign_rainbow.click()
         sleep(2)
-        # windows = driver.window_handles
-        # driver.switch_to.window(windows[-1])
-        # sign_discord = wait.until(
-        #     EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Continue with Discord')]"))
-        # )
-        # sign_discord.click()
-        # sleep(10)
 
     except Exception as e:
         print("Vse ploho" + str(e))

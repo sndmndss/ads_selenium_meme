@@ -1,5 +1,10 @@
-from random import randint
-from selenium.webdriver.common.action_chains import ActionChains
+import json
+
+
+class ProxyDict(dict):
+    def __init__(self, name: str, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.name = name
 
 
 def proxy_options_for_fuser():
@@ -7,22 +12,31 @@ def proxy_options_for_fuser():
     with open("data/proxies.txt", "r") as f:
         for current_index, line in enumerate(f):
             proxy = line.strip().split(":")
-            proxy_option = {
-                    "type": "http",
-                    "host": proxy[0],
-                    "port": proxy[1],
-                    "username": proxy[2],
-                    "password": proxy[3]
-                }
+            proxy_option = ProxyDict(
+                name=line,
+                type="http",
+                host=proxy[0],
+                port=proxy[1],
+                username=proxy[2],
+                password=proxy[3]
+            )
             proxy_list.append(proxy_option)
     return proxy_list
 
 
-def parse_accounts():
+def parse_accounts(token_pos=-1):
     accounts: list = []
     with open("data/accounts.txt", "r") as f:
         for iteration, line in enumerate(f):
-            accounts.append(line.split(";")[-1].rstrip("\n"))
+            accounts.append(line.split(";")[token_pos].rstrip("\n"))
+    return accounts
+
+
+def parse_twitters():
+    accounts: list = []
+    with open("data/twitters.txt", "r") as f:
+        for iteration, line in enumerate(f):
+            accounts.append(json.loads("["+line.split("[")[1].rstrip("\n")))
     return accounts
 
 
@@ -42,7 +56,7 @@ def delete_key(string):
         file.writelines(lines)
 
 
-def delete_discord(string):
+def delete_account(string):
     with open('data/accounts.txt', 'r') as file:
         lines = file.readlines()
     lines = [line for line in lines if string not in line]
@@ -50,11 +64,34 @@ def delete_discord(string):
         file.writelines(lines)
 
 
-def randomize_click(button, driver):
-    actions = ActionChains(driver)
-    button_size = button.size
-    button_width = button_size['width']
-    button_height = button_size['height']
-    offset_x = randint(0, button_width)
-    offset_y = randint(0, button_height)
-    actions.move_to_element_with_offset(button, offset_x, offset_y).click().perform()
+def delete_proxy(proxy: ProxyDict):
+    with open('data/proxies.txt', 'r') as file:
+        lines = file.readlines()
+    lines = [line for line in lines if proxy.name not in line]
+    with open('data/proxies.txt', 'w') as file:
+        file.writelines(lines)
+
+
+def delete_twitter(string):
+    with open('data/twitters.txt', 'r') as file:
+        lines = file.readlines()
+    lines = [line for line in lines if string not in line]
+    with open('data/twitters.txt', 'w') as file:
+        file.writelines(lines)
+
+
+def delete_gmail(string):
+    with open('data/gmails.txt', 'r') as file:
+        lines = file.readlines()
+    lines = [line for line in lines if string not in line]
+    with open('data/gmails.txt', 'w') as file:
+        file.writelines(lines)
+
+
+def parse_gmail():
+    gmails = []
+    with open('data/gmails.txt', 'r', encoding='utf-8') as f:
+        for line in f.readlines():
+            words = line.rstrip("\n").split()
+            gmails.append({"gmail": words[0], "password": words[1]})
+    return gmails

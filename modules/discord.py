@@ -1,6 +1,6 @@
 from data.constants import *
 from loguru import logger
-from helpers import delete_discord
+from helpers import delete_account
 
 
 def login_discord(driver, token: str, is_dyno=0):
@@ -10,9 +10,9 @@ def login_discord(driver, token: str, is_dyno=0):
         driver.get(DISCORD)
     logger.info(token + " | token")
     try:
-        driver.execute_script(js_code, token)
+        driver.execute_script(js_code_discord, token)
         logger.success(token + " | code executed successfully")
-        delete_discord(token)
+        delete_account(token)
     except Exception as e:
         logger.error(token + " | loging in was failed" + str(e))
     logger.warning("DON'T PRESS ENTER IN THIS TERMINAL BEFORE ENDING OF VERIFYING")
