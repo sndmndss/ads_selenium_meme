@@ -41,14 +41,14 @@ def linea_profiles():
     tw_tokens = parse_twitters()
     gmails = parse_gmail()
     for iteration, key in enumerate(keys):
-        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[iteration])
+        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[0])
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
         login_twitter(driver=ads_browser.driver, token=tw_tokens[iteration])
-        rainbow_login(ads_browser.driver, key=key)
-        login_discord(ads_browser.driver, ds_tokens[iteration])
-        gmail_login(ads_browser.driver, gmails[iteration])
+        # rainbow_login(ads_browser.driver, key=key)
+        # login_discord(ads_browser.driver, ds_tokens[iteration])
+        # gmail_login(ads_browser.driver, gmails[iteration])
         input()
         ads_browser.close_driver()
         sleep(1)
