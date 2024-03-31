@@ -2,6 +2,7 @@ from helpers import parse_accounts, parse_keys, parse_twitters, parse_gmail
 from ads_power.ads_browser import AdsBrowser
 from modules.rainbow import rainbow_login
 from modules.molly import login_molly
+from modules.rabby import rabby_login
 from modules.discord import login_discord
 from modules.twitter import login_twitter
 from modules.gmail import gmail_login
@@ -45,10 +46,11 @@ def linea_profiles():
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
+        rabby_login(ads_browser.driver, key)
         login_twitter(driver=ads_browser.driver, token=tw_tokens[iteration])
-        # rainbow_login(ads_browser.driver, key=key)
-        # login_discord(ads_browser.driver, ds_tokens[iteration])
-        # gmail_login(ads_browser.driver, gmails[iteration])
+        login_discord(ads_browser.driver, ds_tokens[iteration])
+        gmail_login(ads_browser.driver, gmails[iteration])
+        input()
         input()
         ads_browser.close_driver()
         sleep(1)
