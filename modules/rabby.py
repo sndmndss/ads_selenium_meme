@@ -3,6 +3,7 @@ from data.constants import RABBY_URL
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from helpers import delete_key
 
 
 def rabby_login(driver, private_key, password=8901324567):
@@ -26,3 +27,4 @@ def rabby_login(driver, private_key, password=8901324567):
         EC.element_to_be_clickable((By.CSS_SELECTOR,
                                     "#root > div > form > div.bottom-0.left-0.w-full.flex.lg\:bottom-\[-24px\].z-10.footer.fixed > div > button")))
     rabby_button3.click()
+    delete_key(private_key)

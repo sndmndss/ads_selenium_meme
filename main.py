@@ -47,10 +47,10 @@ def linea_profiles():
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
-        rabby_login(ads_browser.driver, key)
-        login_twitter(driver=ads_browser.driver, token=tw_tokens[iteration])
+        # rabby_login(ads_browser.driver, key)
+        # login_twitter(driver=ads_browser.driver, token=tw_tokens[iteration])
         login_discord(ads_browser.driver, ds_tokens[iteration])
-        gmail_login(ads_browser.driver, gmails[iteration])
+        # gmail_login(ads_browser.driver, gmails[iteration])
         input()
         input()
         requests.get(proxy_list[0].change)
