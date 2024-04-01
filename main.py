@@ -8,6 +8,7 @@ from modules.twitter import login_twitter
 from modules.gmail import gmail_login
 from ads_power.ads_profiles import AdsProfiles
 from helpers import proxy_options_for_fuser
+import requests
 from time import sleep
 
 
@@ -52,6 +53,7 @@ def linea_profiles():
         gmail_login(ads_browser.driver, gmails[iteration])
         input()
         input()
+        requests.get(proxy_list[0].change)
         ads_browser.close_driver()
         sleep(1)
         AdsProfiles.delete_profiles()
