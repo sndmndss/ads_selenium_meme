@@ -52,9 +52,7 @@ def linea_profiles():
         gmail_login(ads_browser.driver, gmails[iteration])
         input()
         input()
-        ads_browser.close_driver()
         sleep(1)
-        AdsProfiles.delete_profiles()
 
 
 if __name__ == "__main__":

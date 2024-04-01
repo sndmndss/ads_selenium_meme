@@ -6,7 +6,7 @@ from time import sleep
 
 
 def rabby_login(driver, private_key, password=8901324567):
-    wait = WebDriverWait(driver, 20)
+    wait = WebDriverWait(driver, 30)
     driver.get(RABBY_URL)
     print("PRESS F5 IN BROWSER!")
     rabby_button1 = wait.until(
@@ -19,6 +19,7 @@ def rabby_login(driver, private_key, password=8901324567):
     rabby_button2 = wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "#root > div > div > div > form > div.p-32.pt-0 > button")))
     rabby_button2.click()
+    sleep(2)
     input_key = driver.find_element(By.ID, 'key')
     input_key.send_keys(private_key)
     rabby_button3 = wait.until(
