@@ -41,7 +41,7 @@ def linea_profiles():
     proxy_list = proxy_options_for_fuser()
     gmails = parse_gmail()
     for iteration, key in enumerate(keys):
-        if proxy_list > 1:
+        if len(proxy_list) > 1:
             proxy_index = len(proxy_list) % 2
         else:
             proxy_index = 0
