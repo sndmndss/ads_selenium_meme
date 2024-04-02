@@ -100,5 +100,5 @@ def parse_gmail():
         for line in f.readlines():
             if line != "\n":
                 words = line.rstrip("\n").split()
-                gmails.append({"gmail": words[0], "password": words[1]})
+                gmails.append({"gmail": words[0], "password": words[1], "backup_mail": words[2]})
     return gmails
