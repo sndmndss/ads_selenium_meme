@@ -8,6 +8,8 @@ import subprocess
 
 
 class AdsBrowser:
+    browser_value = 0
+
     def __init__(self, ads_info):
         self.driver = self._initiate_driver(ads_info)
 
@@ -16,9 +18,11 @@ class AdsBrowser:
         chrome_driver_path = ads_info["data"]["webdriver"]
         debugger_address = ads_info["data"]["ws"]["selenium"]
         chrome_options = Options()
+        chrome_options.add_argument(f"--user-data-dir=./ads_power/{cls.browser_value}")
         chrome_options.add_experimental_option("debuggerAddress", debugger_address)
         service = Service(executable_path=chrome_driver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
+        cls.browser_value += 1
         return driver
 
     def close_driver(self):
