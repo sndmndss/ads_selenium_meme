@@ -1,9 +1,11 @@
 from data.constants import TWITTER_LINK
 from loguru import logger
 from helpers import delete_twitter
+from helpers import parse_accounts
 
 
-def login_twitter(driver, token) -> None:
+def login_twitter(driver) -> None:
+    token = parse_accounts()
     driver.get(TWITTER_LINK)
     static_cookie = token
     for cookie in token:

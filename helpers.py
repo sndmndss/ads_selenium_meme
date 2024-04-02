@@ -31,7 +31,7 @@ def parse_accounts(token_pos=-1):
     with open("data/accounts.txt", "r") as f:
         for iteration, line in enumerate(f):
             accounts.append(line.split(";")[token_pos].rstrip("\n"))
-    return accounts
+    return accounts[0]
 
 
 def parse_twitters():
@@ -39,7 +39,7 @@ def parse_twitters():
     with open("data/twitters.txt", "r") as f:
         for iteration, line in enumerate(f):
             accounts.append(json.loads("["+line.split("[")[1].rstrip("\n")))
-    return accounts
+    return accounts[0]
 
 
 def parse_keys():
