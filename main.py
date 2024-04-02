@@ -61,7 +61,9 @@ def linea_profiles():
                 login_twitter(ads_browser.driver)
             elif feature == "2":
                 login_discord(ads_browser.driver)
-        requests.get(proxy_list[proxy_index].change)
+        if len(proxy_list) == 1:
+            requests.get(proxy_list[proxy_index].change)
+
         sleep(1)
 
 
