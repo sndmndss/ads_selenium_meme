@@ -68,14 +68,13 @@ def linea_profiles():
 
 
 def twitter_login():
-    tw_tokens = parse_twitters()
     proxy_list = proxy_options_for_fuser()
-    for iteration, key in enumerate(tw_tokens):
-        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[0])
+    for iteration, proxy in enumerate(proxy_list):
+        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy)
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
-        login_twitter(driver=ads_browser.driver, token=key)
+        login_twitter(driver=ads_browser.driver)
         input()
 
 
