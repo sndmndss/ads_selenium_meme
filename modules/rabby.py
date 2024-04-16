@@ -13,15 +13,14 @@ def rabby_login(driver, private_key, password=8901324567):
     rabby_button1 = wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "#root > div > div.rabby-container.pb-\[12px\] > div:nth-child(2) > div:nth-child(2)")))
     rabby_button1.click()
-    input_confirm = driver.find_element(By.ID, 'password')
+    input_confirm = wait.until(EC.element_to_be_clickable((By.ID, 'password')))
     input_confirm.send_keys(password)
-    input_element = driver.find_element(By.ID, 'confirmPassword')
+    input_element = wait.until(EC.element_to_be_clickable((By.ID, 'confirmPassword')))
     input_element.send_keys(password)
     rabby_button2 = wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "#root > div > div > div > form > div.p-32.pt-0 > button")))
     rabby_button2.click()
-    sleep(2)
-    input_key = driver.find_element(By.ID, 'key')
+    input_key = wait.until(EC.element_to_be_clickable((By.ID, 'key')))
     input_key.send_keys(private_key)
     rabby_button3 = wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR,

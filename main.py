@@ -39,24 +39,32 @@ def molly_queue():
 def linea_profiles():
     keys = parse_keys()
     proxy_list = proxy_options_for_fuser()
-    ds_tokens = parse_accounts()
-    tw_tokens = parse_twitters()
     gmails = parse_gmail()
     for iteration, key in enumerate(keys):
-        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[0])
+        if len(proxy_list) > 1:
+            proxy_index = len(proxy_list) % 2
+        else:
+            proxy_index = 0
+        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[proxy_index])
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
         rabby_login(ads_browser.driver, key)
-        login_twitter(driver=ads_browser.driver, token=tw_tokens[iteration])
-        login_discord(ads_browser.driver, ds_tokens[iteration])
+        login_twitter(driver=ads_browser.driver)
+        login_discord(ads_browser.driver)
         gmail_login(ads_browser.driver, gmails[iteration])
-        input()
-        input()
-        requests.get(proxy_list[0].change)
-        ads_browser.close_driver()
+        while True:
+            feature = input("0. To next browser\n1. To try another twitter account\n2. To try another discord account")
+            if feature == "0":
+                break
+            elif feature == "1":
+                login_twitter(ads_browser.driver)
+            elif feature == "2":
+                login_discord(ads_browser.driver)
+        if len(proxy_list) == 1:
+            requests.get(proxy_list[proxy_index].change)
+
         sleep(1)
-        AdsProfiles.delete_profiles()
 
 
 def twitter_login():

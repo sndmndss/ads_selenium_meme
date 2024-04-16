@@ -1,11 +1,18 @@
 from data.constants import TWITTER_LINK
 from loguru import logger
 from helpers import delete_twitter
+from helpers import parse_twitters
 
 
-def login_twitter(driver, token) -> None:
+def login_twitter(driver) -> None:
+    token = parse_twitters()
     driver.get(TWITTER_LINK)
     static_cookie = token
+    for cookie_name in token:
+        try:
+            driver.delete_cookie(cookie_name)
+        except Exception:
+            pass
     for cookie in token:
         if cookie["domain"] == ".twitter.com":
             cookie["sameSite"] = "None"

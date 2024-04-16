@@ -1,9 +1,14 @@
 from data.constants import *
 from loguru import logger
-from helpers import delete_account
+from helpers import delete_account, parse_accounts
 
 
-def login_discord(driver, token: str, is_dyno=0):
+def login_discord(driver, is_dyno=0):
+    token = parse_accounts()
+    try:
+        driver.delete_cookie("token")
+    except Exception:
+        pass
     if is_dyno:
         driver.get(DYNO_MEME)
     else:
