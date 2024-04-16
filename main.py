@@ -59,12 +59,25 @@ def linea_profiles():
         AdsProfiles.delete_profiles()
 
 
+def twitter_login():
+    tw_tokens = parse_twitters()
+    proxy_list = proxy_options_for_fuser()
+    for iteration, key in enumerate(tw_tokens):
+        AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy_list[0])
+        user_id = AdsProfiles.user_ids[0]
+        resp = AdsProfiles.get_ads_profile(user_id)
+        ads_browser = AdsBrowser(resp)
+        login_twitter(driver=ads_browser.driver, token=key)
+        input()
+
+
 if __name__ == "__main__":
-    print("Enter:\n1. To make browsers\n2. For molly\n3. For LINEA")
+    print("Enter:\n1. To make browsers\n2. For molly\n3. For LINEA\n4. Twitter nz")
     menu_options = {
         "1": profile_queue,
         "2": molly_queue,
-        "3": linea_profiles
+        "3": linea_profiles,
+        "4": twitter_login
     }
     choice = input()
     if choice in menu_options:
