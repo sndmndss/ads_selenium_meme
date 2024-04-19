@@ -24,3 +24,11 @@ RAINBOW_BUTTON_2_CSS_SELECTOR = (
     "div._28iyjl0._28iyjlf9._28iyjlgg._28iyjl6o._28iyjl6s._28iyjl51 > div > div:nth-child(2) > div > div"
     " > div > div > button"
 )
+
+STAKELAND_BUTTON_2_CSS_SELECTOR = ("body > div:nth-child(3) > div >"
+                                   " div.relative.flex.flex-1.w-full.max-w-7xl.items-start.justify-center > div > "
+                                   "div > div > div:nth-child(2) > div > div.PixelatedContainer_pixel-container__wFNqS.PixelatedContainer_secondary___5tom.PixelatedContainer_border-large__VmJEI.min-h-12.min-w-40.pt-14.pb-8.mt-\[24px\].w-full.px-\[32px\] "
+                                   "> div.flex.flex-col.w-full.h-full > div:nth-child(2) > div > div > div > div > "
+                                   "div.flex.flex-col.items-center.justify-center.gap-3 > button")
+
+

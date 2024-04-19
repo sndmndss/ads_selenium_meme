@@ -12,6 +12,7 @@ MOLLY_LINK = "https://app.mollygateway.com/profile/qorr10ubrq4yvtgcvcylv"
 BERACHAIN = "https://app.mvhq.io/missions/berachain-farming-vol1"
 TWITTER_LINK = "https://twitter.com/"
 GMAIL_LINK = "https://www.google.com/intl/ua/gmail/about/"
+STAKELAND = "https://www.stakeland.com/"
 js_code_discord = """
         function login(token) {
         setInterval(() => {

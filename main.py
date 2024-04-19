@@ -1,4 +1,5 @@
 from helpers import parse_accounts, parse_keys, parse_twitters, parse_gmail
+from helpers import delete_proxy
 from ads_power.ads_browser import AdsBrowser
 from modules.rainbow import rainbow_login
 from modules.molly import login_molly
@@ -8,6 +9,7 @@ from modules.twitter import login_twitter
 from modules.gmail import gmail_login
 from ads_power.ads_profiles import AdsProfiles
 from helpers import proxy_options_for_fuser
+from modules.stakeland import stakeland
 import requests
 from time import sleep
 
@@ -67,24 +69,37 @@ def linea_profiles():
         sleep(1)
 
 
-def twitter_login():
+def stakeland_quests():
+    keys = parse_keys()
     proxy_list = proxy_options_for_fuser()
     for iteration, proxy in enumerate(proxy_list):
         AdsProfiles.create_profile(profile_name=str(iteration), proxy=proxy)
         user_id = AdsProfiles.user_ids[0]
         resp = AdsProfiles.get_ads_profile(user_id)
         ads_browser = AdsBrowser(resp)
-        login_twitter(driver=ads_browser.driver)
-        input()
+        try:
+            rainbow_login(driver=ads_browser.driver, key=keys[iteration])
+            login_twitter(driver=ads_browser.driver)
+            stakeland(driver=ads_browser.driver)
+
+        except Exception:
+            print("Error with twitter login")
+        while True:
+            feature = input("0. To next browser\n1. To try another twitter account")
+            if feature == "0":
+                break
+            elif feature == "1":
+                login_twitter(ads_browser.driver)
+        delete_proxy(proxy.name)
 
 
 if __name__ == "__main__":
-    print("Enter:\n1. To make browsers\n2. For molly\n3. For LINEA\n4. Twitter nz")
+    print("Enter:\n1. To make browsers\n2. For molly\n3. For LINEA\n4. Stakeland")
     menu_options = {
         "1": profile_queue,
         "2": molly_queue,
         "3": linea_profiles,
-        "4": twitter_login
+        "4": stakeland_quests
     }
     choice = input()
     if choice in menu_options:

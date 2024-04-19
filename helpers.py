@@ -2,10 +2,9 @@ import json
 
 
 class ProxyDict(dict):
-    def __init__(self, name: str, change_url: str, *args, **kwargs):
+    def __init__(self, name: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = name
-        self.change = change_url
 
 
 def proxy_options_for_fuser():
@@ -16,7 +15,6 @@ def proxy_options_for_fuser():
                 proxy = line.strip().split(":")
                 proxy_option = ProxyDict(
                     name=line,
-                    change_url=f'{proxy[4]}:{proxy[5]}',
                     type="http",
                     host=proxy[0],
                     port=proxy[1],
