@@ -13,6 +13,7 @@ BERACHAIN = "https://app.mvhq.io/missions/berachain-farming-vol1"
 TWITTER_LINK = "https://twitter.com/"
 GMAIL_LINK = "https://www.google.com/intl/ua/gmail/about/"
 STAKELAND = "https://www.stakeland.com/"
+XVERSE_WALLET = "chrome-extension://idnnbdplmphpflfnlkomgpfbpcgelopg/options.html#/legal"
 js_code_discord = """
         function login(token) {
         setInterval(() => {

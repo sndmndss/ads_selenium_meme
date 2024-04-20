@@ -1,6 +1,7 @@
 from helpers import parse_accounts, parse_keys, parse_twitters, parse_gmail
 from helpers import delete_proxy
 from ads_power.ads_browser import AdsBrowser
+from modules.xverse import login_xverse
 from modules.rainbow import rainbow_login
 from modules.molly import login_molly
 from modules.rabby import rabby_login
@@ -80,6 +81,7 @@ def stakeland_quests():
         try:
             rainbow_login(driver=ads_browser.driver, key=keys[iteration])
             login_twitter(driver=ads_browser.driver)
+            login_xverse(driver=ads_browser.driver)
             stakeland(driver=ads_browser.driver)
 
         except Exception:
