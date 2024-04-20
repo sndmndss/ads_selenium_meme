@@ -81,7 +81,6 @@ def stakeland_quests():
         try:
             rainbow_login(driver=ads_browser.driver, key=keys[iteration])
             login_twitter(driver=ads_browser.driver)
-            login_xverse(driver=ads_browser.driver)
             stakeland(driver=ads_browser.driver)
 
         except Exception:
@@ -92,7 +91,7 @@ def stakeland_quests():
                 break
             elif feature == "1":
                 login_twitter(ads_browser.driver)
-        delete_proxy(proxy.name)
+        delete_proxy(proxy)
 
 
 if __name__ == "__main__":
