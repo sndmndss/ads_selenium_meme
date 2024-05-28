@@ -81,10 +81,9 @@ def stakeland_quests():
         try:
             rainbow_login(driver=ads_browser.driver, key=keys[iteration])
             login_twitter(driver=ads_browser.driver)
-            stakeland(driver=ads_browser.driver)
 
         except Exception:
-            print("Error with twitter login")
+            print("Error")
         while True:
             feature = input("0. To next browser\n1. To try another twitter account")
             if feature == "0":
