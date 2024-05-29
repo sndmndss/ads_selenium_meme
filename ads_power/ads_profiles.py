@@ -12,6 +12,7 @@ class AdsProfiles:
 
     @classmethod
     def create_profile(cls, profile_name, proxy):
+        cls.delete_profiles()
         data = {
             "name": profile_name,
             "country": cls.country,
